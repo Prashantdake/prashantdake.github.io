@@ -95,7 +95,20 @@
     content: ""; position: absolute; inset: 0; background: var(--accent);
     transform: scaleX(0); transform-origin: left;
     animation: fill .22s ease-out forwards;
+    animation-delay: .25s;
   }
+  /* Fill the upload bar one chunk at a time on page load. */
+  .chunk:nth-child(2)::after  { animation-delay: .47s; }
+  .chunk:nth-child(3)::after  { animation-delay: .69s; }
+  .chunk:nth-child(4)::after  { animation-delay: .91s; }
+  .chunk:nth-child(5)::after  { animation-delay: 1.13s; }
+  .chunk:nth-child(6)::after  { animation-delay: 1.35s; }
+  .chunk:nth-child(7)::after  { animation-delay: 1.57s; }
+  .chunk:nth-child(8)::after  { animation-delay: 1.79s; }
+  .chunk:nth-child(9)::after  { animation-delay: 2.01s; }
+  .chunk:nth-child(10)::after { animation-delay: 2.23s; }
+  .chunk:nth-child(11)::after { animation-delay: 2.45s; }
+  .chunk:nth-child(12)::after { animation-delay: 2.67s; }
   @keyframes fill { to { transform: scaleX(1); } }
   .chunk-caption { display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .chunk-caption .done { opacity: 0; animation: show .3s ease-out forwards; animation-delay: 3.1s; color: var(--ink); font-weight: 600; }
@@ -198,7 +211,7 @@
 
       <div class="chunks" aria-hidden="true">
         <div class="chunk-row">
-          <div class="chunk" style="--i:0"></div><div class="chunk"></div><div class="chunk"></div><div class="chunk"></div>
+          <div class="chunk"></div><div class="chunk"></div><div class="chunk"></div><div class="chunk"></div>
           <div class="chunk"></div><div class="chunk"></div><div class="chunk"></div><div class="chunk"></div>
           <div class="chunk"></div><div class="chunk"></div><div class="chunk"></div><div class="chunk"></div>
         </div>
@@ -317,16 +330,5 @@
   <div class="wrap">Prashant Dake, Pune, Maharashtra, India</div>
 </footer>
 
-<script>
-  // Fill the upload bar one chunk at a time on page load.
-  document.querySelectorAll('.chunk').forEach(function (el, i) {
-    el.style.setProperty('animation-delay', '0s');
-    var inner = 0.25 + i * 0.22;
-    el.style.setProperty('--d', inner + 's');
-  });
-  var style = document.createElement('style');
-  style.textContent = '.chunk::after{animation-delay:var(--d,0s)}';
-  document.head.appendChild(style);
-</script>
 </body>
 </html>
