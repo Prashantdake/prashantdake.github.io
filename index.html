@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prashant Dake · .NET Full Stack Developer</title>
+<meta name="description" content="Prashant Dake is a .NET full stack developer in Pune with 5+ years of experience in C#, ASP.NET Core, Angular and SQL Server.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F2F5F8;
+    --surface: #FFFFFF;
+    --ink: #1B2B4A;
+    --muted: #56657C;
+    --rule: #D5DCE5;
+    --accent: #D89A1C;
+    --accent-ink: #1B2B4A;
+    --chunk-empty: #DDE3EB;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1724;
+      --surface: #172234;
+      --ink: #E6ECF4;
+      --muted: #9AA8BC;
+      --rule: #2A3850;
+      --accent: #F2B83B;
+      --accent-ink: #0F1724;
+      --chunk-empty: #24324A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1724;
+    --surface: #172234;
+    --ink: #E6ECF4;
+    --muted: #9AA8BC;
+    --rule: #2A3850;
+    --accent: #F2B83B;
+    --accent-ink: #0F1724;
+    --chunk-empty: #24324A;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Schibsted Grotesk", "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 22px; }
+
+  /* Top bar */
+  .bar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  .brand { font-weight: 800; text-decoration: none; font-size: 17px; }
+  .bar nav { display: flex; gap: 20px; font-size: 15px; }
+  .bar nav a { text-decoration: none; color: var(--muted); }
+  .bar nav a:hover { color: var(--ink); }
+  @media (max-width: 560px) { .bar nav a.optional { display: none; } }
+
+  /* Hero */
+  .hero { padding: 72px 0 56px; }
+  .hero h1 {
+    font-size: clamp(44px, 9vw, 76px);
+    line-height: 1.02;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .hero .role { font-size: clamp(20px, 3.4vw, 26px); font-weight: 500; margin-top: 12px; color: var(--muted); }
+  .hero p.lead { margin-top: 22px; max-width: 60ch; }
+
+  .chunks { margin-top: 40px; }
+  .chunk-row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5px; }
+  .chunk {
+    height: 22px; border-radius: 3px; background: var(--chunk-empty);
+    position: relative; overflow: hidden;
+  }
+  .chunk::after {
+    content: ""; position: absolute; inset: 0; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    animation: fill .22s ease-out forwards;
+  }
+  @keyframes fill { to { transform: scaleX(1); } }
+  .chunk-caption { display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .chunk-caption .done { opacity: 0; animation: show .3s ease-out forwards; animation-delay: 3.1s; color: var(--ink); font-weight: 600; }
+  @keyframes show { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .chunk::after { animation: none; transform: scaleX(1); }
+    .chunk-caption .done { animation: none; opacity: 1; }
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600; font-size: 16px;
+    padding: 12px 20px; border-radius: 8px; border: 2px solid var(--ink);
+  }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.ghost:hover { border-color: var(--accent); }
+
+  /* Sections */
+  section { padding: 56px 0; border-top: 1px solid var(--rule); }
+  h2 { font-size: 30px; line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 20px; }
+  h3 { font-size: 20px; line-height: 1.3; font-weight: 700; }
+  p + p { margin-top: 14px; }
+  .muted { color: var(--muted); }
+
+  /* Featured project */
+  .feature {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 5px solid var(--accent);
+    border-radius: 10px; padding: 28px;
+  }
+  .feature .stack { font-size: 15px; color: var(--muted); margin-top: 6px; }
+  .facts { list-style: none; margin: 22px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px 24px; }
+  .facts b { display: block; font-size: 28px; line-height: 1.1; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .facts span { font-size: 15px; color: var(--muted); }
+  .feature ul.points { margin-left: 20px; }
+  .feature ul.points li + li { margin-top: 8px; }
+
+  .other { margin-top: 28px; }
+  .other > div + div { margin-top: 20px; }
+  .other p { margin-top: 4px; }
+
+  /* Timeline */
+  .timeline { list-style: none; border-left: 2px solid var(--rule); margin-left: 6px; }
+  .timeline li { position: relative; padding: 0 0 30px 26px; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -8px; top: 7px; width: 14px; height: 14px;
+    border-radius: 50%; background: var(--bg); border: 3px solid var(--accent);
+  }
+  .timeline .when { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .timeline p { margin-top: 6px; }
+
+  /* Skills */
+  .skills { display: grid; gap: 18px; }
+  .skills dt { font-weight: 700; }
+  .skills dd { color: var(--muted); margin-top: 2px; }
+
+  /* Freelance */
+  .offer { background: var(--ink); color: var(--bg); border-radius: 12px; padding: 32px 28px; }
+  .offer h2 { color: var(--bg); }
+  .offer ul { margin: 16px 0 0 20px; }
+  .offer li + li { margin-top: 6px; }
+  .offer .btn { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); margin-top: 24px; }
+  .offer .btn:hover { background: transparent; color: var(--bg); }
+
+  /* Small lists */
+  .compact { list-style: none; }
+  .compact li + li { margin-top: 12px; }
+
+  /* Contact */
+  .contact-list { list-style: none; font-size: 19px; }
+  .contact-list li + li { margin-top: 10px; }
+  .contact-list a { text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+  footer { padding: 32px 0 40px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Prashant Dake</a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a>
+      <a class="optional" href="#experience">Experience</a>
+      <a class="optional" href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+
+    <div class="hero">
+      <h1>Prashant Dake</h1>
+      <p class="role">.NET full stack developer in Pune</p>
+      <p class="lead">I build web apps and REST APIs from database to screen, using C#, ASP.NET Core, Angular and SQL Server. For 5+ years I've shipped software that businesses use every day.</p>
+
+      <div class="chunks" aria-hidden="true">
+        <div class="chunk-row">
+          <div class="chunk" style="--i:0"></div><div class="chunk"></div><div class="chunk"></div><div class="chunk"></div>
+          <div class="chunk"></div><div class="chunk"></div><div class="chunk"></div><div class="chunk"></div>
+          <div class="chunk"></div><div class="chunk"></div><div class="chunk"></div><div class="chunk"></div>
+        </div>
+        <div class="chunk-caption"><span>Large files, sent 10 MB at a time</span><span class="done">Uploaded to SharePoint</span></div>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn ghost" href="#work">See my work</a>
+      </div>
+    </div>
+
+    <section id="work" aria-labelledby="work-h">
+      <h2 id="work-h">What I've built</h2>
+
+      <div class="feature">
+        <h3>Catalyst, a document collaboration portal</h3>
+        <p class="stack">.NET 8 Web API, Angular 19, SQL Server, Microsoft Graph API, SharePoint Online</p>
+        <p style="margin-top:14px">Catalyst keeps documents in sync between Adept and SharePoint Online. Teams can check files in and out, track versions, and see a full history of every change. I own both the backend and the front end.</p>
+
+        <ul class="facts">
+          <li><b>115</b><span>REST endpoints</span></li>
+          <li><b>50+</b><span>Angular components</span></li>
+          <li><b>460+</b><span>automated tests</span></li>
+          <li><b>Multi-GB</b><span>files, streamed safely</span></li>
+        </ul>
+
+        <ul class="points">
+          <li>Moves very large files without loading them into memory, by sending them in 10 MB pieces.</li>
+          <li>Secures every request with JWT login and roles for owners, managers and collaborators.</li>
+          <li>Keeps a tamper-proof audit trail, with sensitive values hidden.</li>
+          <li>Runs checks on every change with GitHub Actions before anything ships.</li>
+        </ul>
+      </div>
+
+      <div class="other">
+        <div>
+          <h3>Retail ERP, inventory module</h3>
+          <p class="muted">An inventory microservice in .NET Core, using PostgreSQL and Cassandra together.</p>
+        </div>
+        <div>
+          <h3>Netalkar Power Transmission</h3>
+          <p class="muted">Business web apps in ASP.NET MVC, with Crystal Reports and faster SQL Server queries.</p>
+        </div>
+        <div>
+          <h3>Barcode billing and restaurant systems</h3>
+          <p class="muted">Two desktop apps I built on my own for shops and restaurants: barcode billing, stock tracking, reports and backups.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" aria-labelledby="exp-h">
+      <h2 id="exp-h">Experience</h2>
+      <ol class="timeline" reversed>
+        <li>
+          <p class="when">Jul 2023 to now</p>
+          <h3>.NET Developer, GrupDev LLC</h3>
+          <p>Lead developer on Catalyst, backend and front end. Also extend the Adept Web API integration and tune slow queries.</p>
+        </li>
+        <li>
+          <p class="when">Aug 2021 to Apr 2023</p>
+          <h3>Software Developer, Logibricks Technology</h3>
+          <p>Built ASP.NET MVC apps and a .NET Core inventory microservice. Worked with clients to gather needs and deliver on time.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <dl class="skills">
+        <div><dt>Backend</dt><dd>C#, .NET 8, ASP.NET Core Web API, ASP.NET MVC, Entity Framework Core, LINQ, microservices, SOLID</dd></div>
+        <div><dt>Front end</dt><dd>Angular 19, TypeScript, RxJS, Angular Material, DevExtreme, HTML, CSS, JavaScript</dd></div>
+        <div><dt>Databases</dt><dd>SQL Server, PostgreSQL, Cassandra, T-SQL, stored procedures, query tuning</dd></div>
+        <div><dt>Cloud and security</dt><dd>Microsoft Graph API, SharePoint Online, Azure AD (Entra ID), OAuth 2.0, JWT, Docker</dd></div>
+        <div><dt>Testing and delivery</dt><dd>NUnit, Moq, Git, GitHub Actions, Agile and Scrum</dd></div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="offer-h">
+      <div class="offer">
+        <h2 id="offer-h">Need a better website for your business?</h2>
+        <p>I also help local businesses, like manufacturers, hospitals and dairies, get a website that works well on phones and brings in customers.</p>
+        <ul>
+          <li>A new website, or a fresh look for your old one</li>
+          <li>Secure "https" and fast loading</li>
+          <li>Enquiry forms, WhatsApp buttons and appointment booking</li>
+        </ul>
+        <a class="btn" href="https://wa.me/917709688608?text=Hi%20Prashant%2C%20I%27d%20like%20to%20talk%20about%20a%20website." target="_blank" rel="noopener">Message me on WhatsApp</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="more-h">
+      <h2 id="more-h">Education and awards</h2>
+      <ul class="compact">
+        <li><h3>Master of Computer Applications (MCA)</h3><p class="muted">Savitribai Phule Pune University, 2018 to 2021</p></li>
+        <li><h3>Bachelor of Computer Applications (BCA)</h3><p class="muted">Savitribai Phule Pune University, 2015 to 2018</p></li>
+        <li><h3>Rising Star Award, GrupDev LLC</h3><p class="muted">For fast growth and strong contribution as a developer</p></li>
+        <li><h3>Best Team Coordination Award, GrupDev LLC</h3><p class="muted">For keeping teams and projects working well together</p></li>
+      </ul>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p style="margin-bottom:20px">Open to new roles and relocation. For work or website projects, reach me here.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:prashantdake123@gmail.com">prashantdake123@gmail.com</a></li>
+        <li><a href="tel:+917709688608">+91 77096 88608</a></li>
+        <li><a href="https://www.linkedin.com/in/prashantdake" target="_blank" rel="noopener">linkedin.com/in/prashantdake</a></li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Prashant Dake, Pune, Maharashtra, India</div>
+</footer>
+
+<script>
+  // Fill the upload bar one chunk at a time on page load.
+  document.querySelectorAll('.chunk').forEach(function (el, i) {
+    el.style.setProperty('animation-delay', '0s');
+    var inner = 0.25 + i * 0.22;
+    el.style.setProperty('--d', inner + 's');
+  });
+  var style = document.createElement('style');
+  style.textContent = '.chunk::after{animation-delay:var(--d,0s)}';
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
